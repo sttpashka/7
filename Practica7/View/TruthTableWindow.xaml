@@ -1,0 +1,37 @@
+﻿<Window x:Class="PracticalWork7.View.TruthTableWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:PracticalWork7.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:TruthTableViewModel}"
+        mc:Ignorable="d"
+        Title="Таблица истинности" Height="600" Width="600">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Button
+            Height="35"
+            Margin="10"
+            Content="Вернуть таблицу (закрыть окно)"
+            FontSize="16"
+            Background="White"
+            Command="{Binding CloseWindowCommand}"
+        />
+
+        <DataGrid
+            Grid.Row="1"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            FontSize="16"
+            HorizontalContentAlignment="Center"
+            Margin="10"
+            ItemsSource="{Binding Expression.Table, Mode=OneWay}"
+            CanUserAddRows="False"
+        />
+    </Grid>
+</Window>

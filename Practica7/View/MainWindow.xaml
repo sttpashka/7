@@ -1,0 +1,189 @@
+﻿<Window x:Class="PracticalWork7.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:PracticalWork7.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+        mc:Ignorable="d"
+        Background="LightGray"
+        WindowStartupLocation="CenterScreen"
+        Title="Калькулятор таблиц истинности" Height="600" Width="800">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button
+                Height="25"
+                Width="25"
+                Content="?"
+                FontSize="16"
+                Margin="20,5"
+                Background="White"
+                HorizontalAlignment="Left"
+                ToolTip="FAQ"
+                BorderThickness="0"
+                Command="{Binding OpenHelpWindowCommand}"
+            />
+
+            <TextBlock
+                Grid.Row="1"
+                Height="170"
+                Margin="20,5,20,20"
+                Padding="65"
+                TextAlignment="Center"
+                Background="White"
+                FontSize="14"
+                Text="{Binding ElementName=InputTextBox, Path=Text, StringFormat=Составить таблицу истинности логического выражения:&#x0a;{0}}"
+            />
+
+            <TextBox
+                x:Name="InputTextBox"
+                Grid.Row="2"
+                Height="35"
+                Margin="20,10"
+                TextAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="14"
+                Text="{Binding Expression.Text, Mode=TwoWay}"
+            />
+
+            <WrapPanel
+                Grid.Row="3"
+                Height="35"
+                Margin="20,10"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+            >   
+
+                <Button
+                    Height="35"
+                    Width="35"
+                    Content="!"
+                    FontSize="20"
+                    Margin="5,0"
+                    ToolTip="Не (отрицание)"
+                    Background="White"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="!"
+                />
+                <Button
+                    Height="35"
+                    Width="35"
+                    Content="∧"
+                    FontSize="18"
+                    Margin="5,0"
+                    ToolTip="И (логическое умножение)"
+                    Background="White"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="∧"
+                 />
+                <Button
+                    Height="35"
+                    Width="35"
+                    Content="∨"
+                    FontSize="20"
+                    Margin="5,0"
+                    ToolTip="Или (логическое сложение)"
+                    Background="White"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="∨"
+                />
+                <Button
+                    Height="35"
+                    Width="35"
+                    Content="⊕"
+                    FontSize="20"
+                    Margin="5,0"
+                    ToolTip="Исключающее или"
+                    Background="White"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="⊕"
+                 />
+                <Button
+                    Height="35"
+                    Width="35"
+                    Content="↑"
+                    FontSize="20"
+                    Margin="5,0"
+                    ToolTip="Штрих Шеффера"
+                    Background="White"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="↑"
+                />
+                <Button
+                    Height="35"
+                    Width="35"
+                    Content="↓"
+                    FontSize="20"
+                    Margin="5,0"
+                    ToolTip="Стрелка Пирса"
+                    Background="White"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="↓"
+                />
+                <Button
+                    Height="35"
+                    Width="35"
+                    Content="≡"
+                    FontSize="20"
+                    Margin="5,0"
+                    ToolTip="Эквивалентность"
+                    Background="White"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="≡"
+                />
+                <Button
+                    Height="35"
+                    Width="35"
+                    Content="→"
+                    FontSize="20"
+                    Margin="5,0"
+                    ToolTip="Импликация"
+                    Background="White"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="→"
+                />
+            </WrapPanel>
+
+            <Button
+                Grid.Row="4"
+                Height="35"
+                Margin="20,10"
+                Content="Получить ответ"
+                FontSize="14"
+                Background="White"
+                Command="{Binding GetAnswerCommand}"
+                ToolTip="Двойное нажатие, чтобы вынести таблицу в отдельное окно"
+            >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding TakeAwayTruthTableCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+
+            <DataGrid
+                Grid.Row="5"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Margin="20,10"
+                FontSize="14"
+                HorizontalContentAlignment="Center"
+                ItemsSource="{Binding Expression.Table, Mode=OneWay}"
+                CanUserAddRows="False"
+                IsReadOnly="True"
+                Visibility="{Binding IsDataGridVisible}"
+            />
+        </Grid>
+    </ScrollViewer>
+</Window>

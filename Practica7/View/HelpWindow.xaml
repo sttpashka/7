@@ -1,0 +1,41 @@
+﻿<Window x:Class="PracticalWork7.View.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PracticalWork7.View"
+        xmlns:viewmodel="clr-namespace:PracticalWork7.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:HelpViewModel}"
+        mc:Ignorable="d"
+        Title="HelpWindow" Height="450" Width="800">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button
+                Height="35"
+                Margin="10"
+                Content="Закрыть окно"
+                FontSize="16"
+                Background="White"
+                Command="{Binding CloseWindowCommand}"
+            />
+
+            <StackPanel Margin="20" Grid.Row="1">
+                <TextBlock Text="Калькулятор таблиц истинности поддерживает следующие логические операции:" FontWeight="Bold" FontSize="16" TextWrapping="WrapWithOverflow" />
+                <TextBlock Text="Отрицание (!): Возвращает инвертированное значение операнда." Margin="0,15,0,0" FontSize="14" TextWrapping="WrapWithOverflow" />
+                <TextBlock Text="И (∧): Возвращает истинное значение, если оба операнда истинны." Margin="0,15,0,0" FontSize="14" TextWrapping="WrapWithOverflow" />
+                <TextBlock Text="Или (∨): Возвращает истинное значение, если хотя бы один из операндов истинен." Margin="0,15,0,0" FontSize="14" TextWrapping="WrapWithOverflow" />
+                <TextBlock Text="Исключающее или (⊕): Возвращает истинное значение, если только один из операндов истинен." Margin="0,15,0,0" FontSize="14" TextWrapping="WrapWithOverflow" />
+                <TextBlock Text="Стрелка Пирса (↑): Возвращает истинное значение, если результат логического умножения операндов отрицателен." Margin="0,15,0,0" FontSize="14" TextWrapping="WrapWithOverflow" />
+                <TextBlock Text="Штрих Шеффера (↓): Возвращает истинное значение, если результат логического сложения операндов отрицателен." Margin="0,15,0,0" FontSize="14" TextWrapping="WrapWithOverflow" />
+                <TextBlock Text="Эквивалентность (≡): Возвращает истинное значение, если операнды имеют одинаковые значения." Margin="0,15,0,0" FontSize="14" TextWrapping="WrapWithOverflow" />
+                <TextBlock Text="Импликация (→): Возвращает ложное значение, если первый операнд истинен и второй операнд ложен, истинное в остальных случаях." Margin="0,15,0,0" FontSize="14" TextWrapping="WrapWithOverflow" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>
